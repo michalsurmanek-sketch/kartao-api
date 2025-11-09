@@ -2,39 +2,36 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import jwt from "jsonwebtoken";
-import { saveProfile, getProfile, saveCard, getCard } from "./knihovna/db.js";
+import { db, saveCard, getCard } from "./knihovna/db.js";
 import { createCardFromProfile } from "./knihovna/card.js";
 import { saveProviderLink, buildMetricsFromProviders } from "./knihovna/oauth.js";
 import { syncAllCards } from "./knihovna/sync.js";
-
-db.cards.set("marie-novotna", {
-  id: "uuid",
-  slug: "marie-novotna",
-  name: "Marie Novotná",
-  handle: "@mariemakeup",
-  city: "Praha",
-  category: "Krása",
-  bio: "Krása a životní styl.",
-  avatar: "https://example.com/avatar.jpg",
-  cover: "https://example.com/cover.jpg",
-  price: 12000,
-  rating: 4.6,
-  verified: false,
-  platforms: ["instagram", "tiktok", "youtube", "facebook"],
-  metrics: {
-    instagram: { connected: true, followers: 53200, updatedAt: "2025-11-08" },
-    tiktok: { connected: false, followers: 0, updatedAt: null },
-    youtube: { connected: true, followers: 8100, updatedAt: "2025-11-08" },
-    facebook: { connected: false, followers: 0, updatedAt: null },
-  },
-  gallery: ["https://example.com/1.jpg", "https://example.com/2.jpg"],
-  createdAt: 1731058000000,
-  updatedAt: 1731059000000,
-});
-
-console.log("✅ Seed karta načtena: marie-novotna");
-
-
+if (!db.cards.has("marie-novotna")) {
+  saveCard("marie-novotna", {
+    id: "uuid",
+    slug: "marie-novotna",
+    name: "Marie Novotná",
+    handle: "@mariemakeup",
+    city: "Praha",
+    category: "Krása",
+    bio: "Krása a životní styl.",
+    avatar: "https://example.com/avatar.jpg",
+    cover: "https://example.com/cover.jpg",
+    price: 12000,
+    rating: 4.6,
+    verified: false,
+    platforms: ["instagram","tiktok","youtube","facebook"],
+    metrics: {
+      instagram: { connected: true, followers: 53200, updatedAt: "2025-11-08" },
+      tiktok:    { connected: false, followers: 0, updatedAt: null },
+      youtube:   { connected: true, followers: 8100, updatedAt: "2025-11-08" },
+      facebook:  { connected: false, followers: 0, updatedAt: null }
+    },
+    gallery: ["https://example.com/1.jpg","https://example.com/2.jpg"],
+    createdAt: 1731058000000,
+    updatedAt: 1731059000000
+  });
+}
 const app = express();
 const PORT = process.env.PORT || 8787;
 const ORIGIN = process.env.ORIGIN || "*";
