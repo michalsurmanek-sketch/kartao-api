@@ -79,6 +79,10 @@ app.post("/api/profile", requireUser, (req, res)=>{
 app.get("/api/profile", requireUser, (req, res)=>{
   res.json({ profile: getProfile(req.userId) || null });
 });
+// 🧩 DEBUG cesta – dočasná kontrola obsahu paměti
+app.get("/api/debug/keys", (req, res) => {
+  res.json([...db.cards.keys()]);
+});
 
 // karta
 app.post("/api/card", requireUser, (req, res)=>{
