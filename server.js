@@ -6,6 +6,36 @@ import { saveProfile, getProfile, saveCard, getCard } from "./lib/db.js";
 import { createCardFromProfile } from "./lib/card.js";
 import { saveProviderLink, buildMetricsFromProviders } from "./lib/oauth.js";
 import { syncAllCards } from "./lib/sync.js";
+// ✅ Načtení testovací karty do paměti při startu
+import { db } from "./lib/db.js";
+
+db.cards.set("marie-novotna", {
+  id: "uuid",
+  slug: "marie-novotna",
+  name: "Marie Novotná",
+  handle: "@mariemakeup",
+  city: "Praha",
+  category: "Krása",
+  bio: "Krása a životní styl.",
+  avatar: "https://example.com/avatar.jpg",
+  cover: "https://example.com/cover.jpg",
+  price: 12000,
+  rating: 4.6,
+  verified: false,
+  platforms: ["instagram", "tiktok", "youtube", "facebook"],
+  metrics: {
+    instagram: { connected: true, followers: 53200, updatedAt: "2025-11-08" },
+    tiktok: { connected: false, followers: 0, updatedAt: null },
+    youtube: { connected: true, followers: 8100, updatedAt: "2025-11-08" },
+    facebook: { connected: false, followers: 0, updatedAt: null },
+  },
+  gallery: ["https://example.com/1.jpg", "https://example.com/2.jpg"],
+  createdAt: 1731058000000,
+  updatedAt: 1731059000000,
+});
+
+console.log("✅ Seed karta načtena: marie-novotna");
+
 
 const app = express();
 const PORT = process.env.PORT || 8787;
