@@ -2,12 +2,12 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import jwt from "jsonwebtoken";
-import { saveProfile, getProfile, saveCard, getCard } from "./lib/db.js";
-import { createCardFromProfile } from "./lib/card.js";
-import { saveProviderLink, buildMetricsFromProviders } from "./lib/oauth.js";
-import { syncAllCards } from "./lib/sync.js";
+import { saveProfile, getProfile, saveCard, getCard } from "./knihovna/db.js";
+import { createCardFromProfile } from "./knihovna/card.js";
+import { saveProviderLink, buildMetricsFromProviders } from "./knihovna/oauth.js";
+import { syncAllCards } from "./knihovna/sync.js";
 // ✅ Načtení testovací karty do paměti při startu
-import { db } from "./lib/db.js";
+import { db } from "./knihovna/db.js";
 
 db.cards.set("marie-novotna", {
   id: "uuid",
