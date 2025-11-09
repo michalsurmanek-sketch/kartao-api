@@ -6,8 +6,6 @@ import { saveProfile, getProfile, saveCard, getCard } from "./knihovna/db.js";
 import { createCardFromProfile } from "./knihovna/card.js";
 import { saveProviderLink, buildMetricsFromProviders } from "./knihovna/oauth.js";
 import { syncAllCards } from "./knihovna/sync.js";
-// ✅ Načtení testovací karty do paměti při startu
-import { db } from "./knihovna/db.js";
 
 db.cards.set("marie-novotna", {
   id: "uuid",
