@@ -43,8 +43,11 @@ const ORIGIN = process.env.ORIGIN || "*";
 const ADMIN_KEY = process.env.ADMIN_KEY || "kartao-dev";
 const JWT_SECRET = process.env.JWT_SECRET || "secret";
 
-app.use(cors({ origin: ORIGIN, credentials: true }));
-app.use(express.json());
+app.use(cors({
+  origin: ["https://www.kartao.cz", "https://kartao.cz", "http://localhost:5173"],
+  credentials: true
+}));
+
 
 // demo auth
 function userFromAuth(req) {
